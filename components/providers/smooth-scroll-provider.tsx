@@ -11,30 +11,36 @@ export default function SmoothScrollProvider({ children }: { children: React.Rea
   const [lenis, setLenis] = useState<Lenis | null>(null);
 
   useEffect(() => {
-    const lenisInstance = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
-      touchMultiplier: 2,
-    });
+  const lenisInstance = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    smoothWheel: true,
+    touchMultiplier: 2,
+    infinite: false,
+  })
 
-    setLenis(lenisInstance);
+  // 🔴 IMPORTANT: prevent native body scrolling
+  document.documentElement.classList.add("lenis")
+  document.body.style.overflow = "hidden"
 
-    let rafId = 0;
+  setLenis(lenisInstance)
 
-    function raf(time: number) {
-      lenisInstance.raf(time);
-      rafId = requestAnimationFrame(raf);
-    }
+  let rafId = 0
+  const raf = (time: number) => {
+    lenisInstance.raf(time)
+    rafId = requestAnimationFrame(raf)
+  }
+  rafId = requestAnimationFrame(raf)
 
-    rafId = requestAnimationFrame(raf);
+  return () => {
+    cancelAnimationFrame(rafId)
+    lenisInstance.destroy()
+    document.body.style.overflow = ""
+    document.documentElement.classList.remove("lenis")
+    setLenis(null)
+  }
+}, [])
 
-    return () => {
-      cancelAnimationFrame(rafId);
-      lenisInstance.destroy();
-      setLenis(null);
-    };
-  }, []);
 
   return <LenisContext.Provider value={lenis}>{children}</LenisContext.Provider>;
 }

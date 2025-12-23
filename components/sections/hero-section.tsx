@@ -7,6 +7,7 @@ import { useLenis } from "@/components/providers/smooth-scroll-provider"
 import FloatingParticles from "@/components/features/floating-particles"
 import { ShaderAnimation } from "@/components/ui/shader-animation"
 import { heroData, eventInfo } from "@/lib/data"
+import Image from "next/image"
 
 export default function HeroSection() {
   const [mounted, setMounted] = useState(false)
@@ -142,11 +143,11 @@ useEffect(() => {
         >
           <div className="inline-block p-1 rounded-2xl bg-gradient-to-br from-primary/30 via-secondary/20 to-primary/30 holographic group perspective-1000">
             <div className="p-6 bg-card/80 backdrop-blur-sm rounded-xl transition-transform duration-700 group-hover:scale-105 preserve-3d">
-              <div className="w-28 h-28 md:w-36 md:h-36 border-2 border-dashed border-primary/40 rounded-xl flex flex-col items-center justify-center gap-2 hover:border-primary/60 transition-all duration-500 float-3d">
-                <Terminal className="w-8 h-8 text-primary/60" />
+            <div className="w-28 h-28 md:w-36 md:h-36 border-2 border-dashed border-primary/40 rounded-xl flex flex-col items-center justify-center gap-2 hover:border-primary/60 transition-all duration-500 float-3d">
+              <Terminal className="w-8 h-8 text-primary/60" />
                 <span className="font-[var(--font-orbitron)] text-primary text-lg font-bold">{heroData.logo.text}</span>
                 <span className="font-[var(--font-orbitron)] text-primary/60 text-xs">{heroData.logo.subtitle}</span>
-              </div>
+                </div>
             </div>
           </div>
         </div>
@@ -237,6 +238,14 @@ useEffect(() => {
 >
   <Link
     href="#about"
+    onClick={(e) => {
+      e.preventDefault()
+      if ((lenis as any)?.scrollTo) {
+        ;(lenis as any).scrollTo("#about", { duration: 1.2 })
+      } else {
+        document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })
+      }
+    }}
     className="flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors duration-300 group"
   >
     <span className="font-[var(--font-space)] text-xs tracking-widest uppercase">
@@ -247,32 +256,6 @@ useEffect(() => {
     </div>
   </Link>
 </div>
-
-
-        <div
-          className={`absolute bottom-10 left-1/2 -translate-x-1/2 transition-all duration-1000 delay-700 ${
-            mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
-        >
-          <Link
-            href="#about"
-            onClick={(e) => {
-              e.preventDefault()
-              if ((lenis as any)?.scrollTo) {
-                ;(lenis as any).scrollTo("#about", { duration: 1.2 })
-              } else {
-                const target = document.getElementById("about")
-                if (target) target.scrollIntoView({ behavior: "smooth" })
-              }
-            }}
-            className="flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors duration-300 group"
-          >
-            <span className="font-[var(--font-space)] text-xs tracking-widest uppercase">Scroll to explore</span>
-            <div className="w-6 h-10 border-2 border-current rounded-full flex justify-center pt-2 group-hover:border-primary transition-colors duration-300">
-              <div className="w-1 h-2 bg-current rounded-full animate-bounce group-hover:bg-primary" />
-            </div>
-          </Link>
-        </div>
       </div>
 
       <style jsx>{`

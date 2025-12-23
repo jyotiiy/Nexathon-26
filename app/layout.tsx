@@ -69,6 +69,7 @@ export const viewport: Viewport = {
   ],
   width: "device-width",
   initialScale: 1,
+  viewportFit: "cover",
 }
 
 export default function RootLayout({
@@ -78,9 +79,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning className="dark">
-      <body
-        className={`${orbitron.variable} ${rajdhani.variable} ${plusJakarta.variable} ${jetbrainsMono.variable} ${spaceGrotesk.variable} font-sans antialiased`}
-      >
+ <body
+  className={`${orbitron.variable} ${rajdhani.variable} ${plusJakarta.variable}
+  ${jetbrainsMono.variable} ${spaceGrotesk.variable}
+  font-sans antialiased
+  bg-[#060c06]
+  min-h-screen`}
+>
+
+
         <CustomCursor />
         <SmoothScrollProvider>
           {children}
