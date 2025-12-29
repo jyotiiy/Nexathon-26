@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { Heart, ArrowUp, Terminal } from "lucide-react"
+import { Heart, ArrowUp, Terminal, Instagram, Linkedin, Github, Globe as GlobeIcon } from "lucide-react"
 import Image from "next/image"
 import { useLenis } from "@/components/providers/smooth-scroll-provider"
 
@@ -21,6 +21,28 @@ const footerLinks = {
   contact: [
     { label: "hello@nexathon.tech", href: "mailto:hello@nexathon.tech" },
     { label: "+91 98765 43210", href: "tel:+919876543210" },
+  ],
+  social: [
+    { 
+      label: "Instagram", 
+      href: "https://instagram.com/nexathon",
+      icon: "instagram"
+    },
+    { 
+      label: "LinkedIn", 
+      href: "https://linkedin.com/company/nexathon",
+      icon: "linkedin"
+    },
+    { 
+      label: "Website", 
+      href: "https://nexathon.tech",
+      icon: "globe"
+    },
+    { 
+      label: "GitHub", 
+      href: "https://github.com/nexathon",
+      icon: "github"
+    },
   ],
 }
 
@@ -92,17 +114,17 @@ export default function Footer() {
             </p>
             {/* Logo placeholders with float animation */}
             <div className="flex items-center gap-3">
-              <div
+              {/* <div
                 className="w-12 h-12 border border-dashed border-primary/30 rounded-lg flex items-center justify-center hover:border-primary/60 transition-all duration-300 float"
                 style={{ animationDelay: "0s" }}
-              >
-                <Image src="/logo.png" alt="Logo" width={64} height={64} className="w-16 h-16 object-contain" />
-              </div>
+              > */}
+                <Image src="/club_final.png" alt="Logo" width={80} height={80} className="w-16 h-16 object-contain" />
+              {/* </div> */}
               <div
-                className="w-12 h-12 border border-dashed border-primary/30 rounded-lg flex items-center justify-center hover:border-primary/60 transition-all duration-300 float"
-                style={{ animationDelay: "1s" }}
+                className="justify-center"
+                // style={{ animationDelay: "1s" }}
               >
-                <Image src="/VIT_COLOURED.png" alt="College Logo" width={64} height={64} className="w-16 h-16 object-contain" />
+                <Image src="/vit-blue.png" alt="College Logo" width={80} height={80} className="w-26 h-26 object-contain" />
               </div>
             </div>
           </div>
@@ -158,6 +180,25 @@ export default function Footer() {
                   </a>
                 </li>
               ))}
+              <li className="mt-4 pt-4 border-t border-border/50">
+                <div className="flex items-center gap-3">
+                  {footerLinks.social.map((social) => (
+                    <a
+                      key={social.label}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-muted-foreground hover:text-primary transition-colors"
+                      aria-label={social.label}
+                    >
+                      {social.icon === 'instagram' && <Instagram className="w-5 h-5" />}
+                      {social.icon === 'linkedin' && <Linkedin className="w-5 h-5" />}
+                      {social.icon === 'github' && <Github className="w-5 h-5" />}
+                      {social.icon === 'globe' && <GlobeIcon className="w-5 h-5" />}
+                    </a>
+                  ))}
+                </div>
+              </li>
             </ul>
           </div>
         </div>

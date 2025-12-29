@@ -38,27 +38,20 @@ const spaceGrotesk = Space_Grotesk({
 })
 
 export const metadata: Metadata = {
-  title: "NEXATHON 2026 | Build. Innovate. Transform.",
-  description:
-    "Join the ultimate 36-hour hackathon experience. Build innovative solutions, collaborate with brilliant minds, and compete for amazing prizes at NEXATHON 2026.",
-  keywords: ["hackathon", "coding", "technology", "innovation", "NEXATHON", "2026", "tech event", "programming"],
-  generator: "v0.app",
+  title: "NEXATHON 2026 | VIT Chennai's Premier Hackathon",
+  description: "Join VIT Chennai's most anticipated 24-hour hackathon. Build, innovate, and compete with the brightest minds in tech.",
+  keywords: ["hackathon", "VIT Chennai", "programming", "coding", "tech event", "innovation"],
+  authors: [{ name: 'Nexus - The Technical Club of VIT Chennai' }],
+  creator: 'Nexus - VIT Chennai',
+  publisher: 'VIT Chennai',
   icons: {
     icon: [
-      {
-        url: "/icon-light-32x32.png",
-        media: "(prefers-color-scheme: light)",
-      },
-      {
-        url: "/icon-dark-32x32.png",
-        media: "(prefers-color-scheme: dark)",
-      },
-      {
-        url: "/icon.svg",
-        type: "image/svg+xml",
-      },
+      { url: '/Nexathon-Logo.jpeg', sizes: '32x32', type: 'image/jpeg' },
+      { url: '/Nexathon-Logo.jpeg', sizes: '192x192', type: 'image/jpeg' },
     ],
-    apple: "/apple-icon.png",
+    apple: [
+      { url: '/Nexathon-Logo.jpeg', sizes: '180x180', type: 'image/jpeg' },
+    ],
   },
 }
 

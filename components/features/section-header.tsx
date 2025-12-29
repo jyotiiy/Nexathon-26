@@ -4,11 +4,17 @@ interface SectionHeaderProps {
   title: string
   subtitle?: string
   highlight?: string
+  className?: string
 }
 
-export default function SectionHeader({ title, subtitle, highlight }: SectionHeaderProps) {
+export default function SectionHeader({ 
+  title, 
+  subtitle, 
+  highlight, 
+  className = "" 
+}: SectionHeaderProps) {
   return (
-    <ScrollAnimation className="text-center mb-16 md:mb-20">
+    <ScrollAnimation className={`text-center mb-16 md:mb-20 ${className}`}>
       <div className="inline-flex items-center gap-4 mb-6">
         <div className="h-px w-12 md:w-20 bg-gradient-to-r from-transparent via-primary/50 to-primary" />
         <span className="font-[var(--font-jetbrains)] text-primary text-xs md:text-sm tracking-[0.2em] uppercase">

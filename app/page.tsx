@@ -25,7 +25,7 @@ export default function Home() {
         <TimelineSection />
         <SponsorsSection />
         <RewardsSection />
-        <RegisterSection />
+        {/* <RegisterSection /> */}
         <ThemeSection />
         <FaqSection />
         <GallerySection />

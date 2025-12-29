@@ -134,12 +134,12 @@ export default function FaqSection() {
                     <Sparkles className="w-5 h-5 group-hover:rotate-12 transition-transform" />
                     Contact Us
                   </Link>
-                  <a
+                  {/* <a
                     href="mailto:hello@nexathon.tech"
                     className="px-8 py-4 border-2 border-primary/50 text-primary font-[var(--font-rajdhani)] font-bold rounded-xl hover:bg-primary/10 hover:border-primary transition-all duration-300 hover:scale-105 hover:-translate-y-1 inline-flex items-center justify-center"
                   >
                     hello@nexathon.tech
-                  </a>
+                  </a> */}
                 </div>
               </div>
             </div>

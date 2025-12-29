@@ -3,7 +3,7 @@
 import { Brain, Leaf, Shield, Smartphone, Globe, Cpu } from "lucide-react"
 import SectionHeader from "@/components/features/section-header"
 import ScrollAnimation from "@/components/features/scroll-animation"
-import ContactCTA from "@/components/features/contact-cta"
+import {ContactCTA} from "@/components/features/contact-cta"
 import TiltCard from "@/components/features/tilt-card"
 
 const themes = [

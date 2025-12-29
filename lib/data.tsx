@@ -59,7 +59,7 @@ export const eventInfo = {
   prizePool: "₹5,00,000",
   registrationFee: "₹500 per team",
   teamSize: "2-4 members",
-  edition: "5th Edition",
+  edition: "2nd Edition",
   year: 2026,
 }
 
@@ -83,7 +83,7 @@ export const heroData = {
   cta: {
     primary: {
       text: "Register Now",
-      link: "#register",
+      link: "https://eventhubcc.vit.ac.in/EventHub/",
     },
     secondary: {
       text: "Learn More",
@@ -123,12 +123,12 @@ export const aboutData = {
     {
       icon: Trophy,
       title: "Amazing Prizes",
-      description: "Win prizes worth ₹5,00,000+ across multiple categories",
+      description: "Win exciting prizes across multiple categories",
     },
     {
       icon: Zap,
       title: "Workshops & Sessions",
-      description: "Learn from industry experts through hands-on workshops",
+      description: "Learn about new avenues via hands on workshops",
     },
     {
       icon: Globe,
@@ -589,7 +589,7 @@ export const contactData = {
     line3: "Karnataka 560095, India",
   },
   email: "nexusvitc@gmail.com",
-  phone: "+91 98765 43210",
+  phone: "+91 95554 01204 / +91 70029 98267",
   social: {
     twitter: "https://twitter.com/nexathon",
     linkedin: "https://linkedin.com/company/nexathon",
@@ -603,19 +603,19 @@ export const contactData = {
       name: "Priya Sharma",
       role: "Event Lead",
       email: "priya@nexathon.com",
-      phone: "+91 98765 11111",
+      phone: "+91 95554 01204",
     },
     {
       name: "Rahul Verma",
       role: "Technical Head",
       email: "rahul@nexathon.com",
-      phone: "+91 98765 22222",
+      phone: "+91 70029 98267",
     },
     {
       name: "Ananya Patel",
       role: "Sponsorship Lead",
       email: "ananya@nexathon.com",
-      phone: "+91 98765 33333",
+      phone: "+91 70029 98267",
     },
   ],
 }
