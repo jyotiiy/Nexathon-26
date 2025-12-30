@@ -11,42 +11,43 @@ const faqs = [
   {
     question: "Who can participate in NEXATHON?",
     answer:
-      "NEXATHON is open to all students and professionals passionate about technology. Whether you're a beginner or an experienced developer, everyone is welcome! Teams can consist of 2-4 members from any college or professional background.",
+      "We are updating the site",
+     
   },
   {
     question: "Is there a registration fee?",
     answer:
-      "Yes, there is a nominal registration fee of ₹500 per team (not per person). This covers meals, swag, and access to all workshops and mentoring sessions. Early bird registrations get a 20% discount!",
+      "We are updating the site",
   },
   {
     question: "What should I bring to the hackathon?",
     answer:
-      "Bring your laptop, charger, and any hardware you might need for your project. We'll provide WiFi, power outlets, food, and beverages. Don't forget your student ID for verification!",
+     "We are updating the site",
   },
   {
     question: "Can I participate without a team?",
     answer:
-      "Yes! We have a team matching session before the hackathon where solo participants can find teammates. You can also join our Discord server to connect with potential team members.",
+     "We are updating the site",
   },
   {
     question: "What are the judging criteria?",
     answer:
-      "Projects are judged on Innovation & Creativity (25%), Technical Complexity (25%), Design & User Experience (20%), Practical Applicability (20%), and Presentation (10%). Our panel includes industry experts and tech leaders.",
+      "We are updating the site",
   },
   {
     question: "Can I work on a pre-existing project?",
     answer:
-      "No, all projects must be built from scratch during the hackathon. However, you can use open-source libraries, APIs, and pre-existing tools. Any code written before the hackathon is not allowed.",
+      "We are updating the site",
   },
   {
     question: "Will there be mentors available?",
     answer:
-      "We have 50+ mentors from leading tech companies who will be available throughout the event to guide you. Mentors cover various domains including AI/ML, Web Development, Blockchain, and Design.",
+      "We are updating the site",
   },
   {
     question: "Is accommodation provided?",
     answer:
-      "The venue is equipped for overnight stay with rest areas. For participants needing formal accommodation, we have partnered with nearby hotels offering special discounts. Details will be shared upon registration confirmation.",
+      "We are updating the site",
   },
 ]
 
@@ -62,9 +63,9 @@ export default function FaqSection() {
 
         <div className="space-y-4 perspective-2000">
           {faqs.map((faq, index) => (
-            <ScrollAnimation key={index} delay={50 * (index + 1)}>
+            <ScrollAnimation key={index} delay={0}>
               <div
-                className={`bg-card/60 backdrop-blur-sm border rounded-2xl overflow-hidden transition-all duration-500 preserve-3d ${
+                className={`bg-card/60 border rounded-2xl overflow-hidden transition-all duration-150 ${
                   openIndex === index
                     ? "border-primary/40 shadow-[0_0_40px_oklch(0.78_0.22_145/0.15)] scale-[1.02]"
                     : "border-border hover:border-primary/20 hover:scale-[1.01]"
@@ -88,17 +89,20 @@ export default function FaqSection() {
                     <ChevronDown className="w-5 h-5 text-primary" />
                   </div>
                 </button>
-                <div
-                  className={`grid transition-all duration-500 ease-out ${
-                    openIndex === index ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-                  }`}
-                >
-                  <div className="overflow-hidden">
-                    <div className="px-6 pb-5 border-t border-border/50 pt-4">
-                      <p className="font-[var(--font-sans)] text-muted-foreground leading-relaxed">{faq.answer}</p>
-                    </div>
-                  </div>
-                </div>
+  <div
+  className={`overflow-hidden ${
+    openIndex === index ? "opacity-100" : "opacity-0"
+  } transition-opacity duration-120`}
+>
+  {openIndex === index && (
+    <div className="px-6 pb-5 border-t border-border/50 pt-4">
+      <p className="font-[var(--font-sans)] text-muted-foreground leading-relaxed">
+        {faq.answer}
+      </p>
+    </div>
+  )}
+</div>
+
               </div>
             </ScrollAnimation>
           ))}
