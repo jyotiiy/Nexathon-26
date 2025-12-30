@@ -8,7 +8,7 @@ export default function RewardsSection() {
     <section id="about" className="relative py-20 md:py-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
-          title="Rewards & Benefits"
+          title="Rewards"
           subtitle="Exciting prizes and opportunities coming soon"
           highlight="// REWARDS"
         />
