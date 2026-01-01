@@ -4,7 +4,7 @@ import { useState, useEffect, useRef, useCallback } from "react"
 import SectionHeader from "@/components/features/section-header"
 import ScrollAnimation from "@/components/features/scroll-animation"
 import { cn } from "@/lib/utils"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { ChevronLeft, ChevronRight, X } from "lucide-react"
 
 const galleryImages = [
   { src: "/img6.jpg", alt: "Coding Session" },
@@ -75,6 +75,33 @@ export default function GallerySection() {
     return () => clearIdleTimer()
   }, [startIdleTimer, clearIdleTimer])
 
+  // Lightbox handlers
+  const [lightboxOpen, setLightboxOpen] = useState(false)
+
+  const openLightbox = useCallback(() => {
+    setLightboxOpen(true)
+    setIsAutoPlaying(false)
+    clearIdleTimer()
+  }, [clearIdleTimer])
+
+  const closeLightbox = useCallback(() => {
+    setLightboxOpen(false)
+    startIdleTimer()
+  }, [startIdleTimer])
+
+  // Close lightbox on Escape key and navigate with arrows when open
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && lightboxOpen) closeLightbox()
+      if (lightboxOpen) {
+        if (e.key === "ArrowLeft") handlePrev()
+        if (e.key === "ArrowRight") handleNext()
+      }
+    }
+    window.addEventListener("keydown", handleKeyDown)
+    return () => window.removeEventListener("keydown", handleKeyDown)
+  }, [lightboxOpen, closeLightbox, handlePrev, handleNext])
+
   // Swipe handlers
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.targetTouches[0].clientX
@@ -128,8 +155,8 @@ export default function GallerySection() {
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
-          onMouseEnter={() => setIsAutoPlaying(false)}
-          onMouseLeave={() => setIsAutoPlaying(true)}
+          onMouseEnter={recordInteraction}
+          onMouseLeave={() => startIdleTimer()}
         >
           {galleryImages.map((image, index) => {
             const status = getCardStatus(index)
@@ -167,6 +194,7 @@ export default function GallerySection() {
                 onClick={() => {
                   if (isPrev) handlePrev()
                   if (isNext) handleNext()
+                  if (isActive) openLightbox()
                 }}
               >
                 <div className={cn(
@@ -240,6 +268,107 @@ export default function GallerySection() {
           </button>
         </div>
       </ScrollAnimation>
+
+      {/* Lightbox Modal */}
+      {lightboxOpen && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center"
+          onClick={closeLightbox}
+        >
+          {/* Backdrop */}
+          <div 
+            className="absolute inset-0 bg-black/90 backdrop-blur-md"
+            style={{
+              animation: "fadeIn 300ms ease-out forwards"
+            }}
+          />
+          
+          {/* Close button */}
+          <button
+            onClick={closeLightbox}
+            className="absolute top-6 right-6 z-50 p-3 rounded-full bg-white/10 border border-white/20 hover:bg-white/20 transition-all group"
+            aria-label="Close lightbox"
+          >
+            <X className="w-6 h-6 text-white group-hover:rotate-90 transition-transform duration-300" />
+          </button>
+
+          {/* Navigation buttons */}
+          <button
+            onClick={(e) => { e.stopPropagation(); handlePrev() }}
+            className="absolute left-4 md:left-8 z-50 p-3 rounded-full bg-white/10 border border-white/20 hover:bg-white/20 transition-all group"
+            aria-label="Previous image"
+          >
+            <ChevronLeft className="w-8 h-8 text-white group-hover:-translate-x-1 transition-transform" />
+          </button>
+          
+          <button
+            onClick={(e) => { e.stopPropagation(); handleNext() }}
+            className="absolute right-4 md:right-8 z-50 p-3 rounded-full bg-white/10 border border-white/20 hover:bg-white/20 transition-all group"
+            aria-label="Next image"
+          >
+            <ChevronRight className="w-8 h-8 text-white group-hover:translate-x-1 transition-transform" />
+          </button>
+
+          {/* Image container */}
+          <div 
+            className="relative z-10 w-[90vw] h-[80vh] max-w-6xl flex items-center justify-center"
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              animation: "scaleIn 400ms cubic-bezier(0.23,1,0.32,1) forwards"
+            }}
+          >
+            <img
+              src={galleryImages[activeIndex].src}
+              alt={galleryImages[activeIndex].alt}
+              className="max-w-full max-h-full object-contain rounded-2xl shadow-2xl"
+              style={{
+                boxShadow: "0 0 80px rgba(var(--primary-rgb),0.3)"
+              }}
+            />
+            
+            {/* Image caption */}
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 px-6 py-3 bg-black/60 backdrop-blur-sm rounded-full border border-white/10">
+              <p className="text-white font-[var(--font-rajdhani)] font-bold text-lg">
+                {galleryImages[activeIndex].alt}
+              </p>
+            </div>
+          </div>
+
+          {/* Image counter */}
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-50 flex gap-2">
+            {galleryImages.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={(e) => { e.stopPropagation(); setActiveIndex(idx) }}
+                className={cn(
+                  "w-2 h-2 rounded-full transition-all duration-300",
+                  idx === activeIndex 
+                    ? "w-8 bg-primary shadow-[0_0_10px_oklch(0.78_0.22_145/0.5)]" 
+                    : "bg-white/30 hover:bg-white/50"
+                )}
+                aria-label={`Go to image ${idx + 1}`}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+
+      <style jsx>{` 
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        @keyframes scaleIn {
+          from { 
+            opacity: 0;
+            transform: scale(0.8);
+          }
+          to { 
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+      `}</style>
     </section>
   )
 }
