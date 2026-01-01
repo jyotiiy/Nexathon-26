@@ -137,7 +137,6 @@ export default function GallerySection() {
             const isPrev = status === "prev"
             const isNext = status === "next"
             const isHidden = status === "hidden"
-            const transitionDelay = isActive ? "0ms" : isPrev || isNext ? "60ms" : "120ms"
 
             return (
               <div
@@ -161,7 +160,7 @@ export default function GallerySection() {
                   zIndex: isActive ? 20 : isNext || isPrev ? 10 : 5,
                   filter: isActive ? "none" : "brightness(0.5) blur(1px)",
                   opacity: isHidden ? 0 : isActive ? 1 : 0.6,
-                  transition: `transform 700ms cubic-bezier(0.23,1,0.32,1) ${transitionDelay}, opacity 500ms ease ${transitionDelay}, filter 500ms ease ${transitionDelay}, box-shadow 500ms ease ${transitionDelay}`,
+                  transition: "transform 500ms cubic-bezier(0.23,1,0.32,1), opacity 500ms ease, filter 500ms ease, box-shadow 500ms ease",
                   willChange: "transform, opacity, filter, box-shadow",
                   boxShadow: isActive ? "0 0 50px rgba(var(--primary-rgb),0.25)" : "0 10px 30px rgba(2,6,23,0.2)"
                 }}
